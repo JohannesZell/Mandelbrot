@@ -14,7 +14,7 @@ public class MandelbrotPanel extends JPanel {
     public MandelbrotPanel( int sideLength ) {
         this.setPreferredSize( new Dimension( sideLength, sideLength ));
         //this.addMouseListener( new Mouse);
-
+//s
         /*BufferedImage myPicture = null;
         try {
             myPicture = ImageIO.read(new File("/Users/ronny/IdeaProjects/mandelbrotRonny/src/javaGUI/image.png"));

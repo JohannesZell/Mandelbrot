@@ -22,6 +22,7 @@ public class MandelbrotFrame extends JFrame {
 
     public MandelbrotFrame() {
         initComponents();
+        //daf<s
     }
 
     private void bGenerateActionPerformed(ActionEvent e) {
