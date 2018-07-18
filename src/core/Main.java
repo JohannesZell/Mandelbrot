@@ -26,17 +26,23 @@ public class Main {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
     }
 
-    public static void drawMandelbrot( MandelbrotPanel MandelbrotViewer ) {
+
+
+    public static void drawMandelbrot( MandelbrotPanel mandelbrotViewer, double xmin, double xmax, double ymin, double ymax) {
         //MandelbrotViewer.paintComponent( img );
         try {
-            man.generateMandelbrotImage(img, center.re + offset, center.re - offset, center.im + offset, center.im - offset);
+            //man.generateMandelbrotImage( img, center.re + offset, center.re - offset, center.im + offset, center.im - offset );
+            man.generateMandelbrotImage( img, xmin, xmax, ymin, ymax );
             //man.generateJuliaImage(img, -2, 1.5, -2, 2, c );
         } catch (InterruptedException e1) {
             e1.printStackTrace();
         }
-        MandelbrotViewer.loadImage( img );
-        MandelbrotViewer.repaint();
+        mandelbrotViewer.setImage( img );
+        mandelbrotViewer.loadImage( img );
+        mandelbrotViewer.repaint();
+        mandelbrotViewer.paintComponent( img.getGraphics() );
     }
 }

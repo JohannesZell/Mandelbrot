@@ -22,13 +22,15 @@ public class MandelbrotFrame extends JFrame {
 
     public MandelbrotFrame() {
         initComponents();
-        Main.drawMandelbrot( pMandelbrotViewer );
+        Main.drawMandelbrot( pMandelbrotViewer, 10, Double.parseDouble(eReelMax.getText()),
+                Double.parseDouble(eImagMin.getText()), Double.parseDouble(eImagMax.getText()) );
         //daf<s
     }
 
     private void bGenerateActionPerformed(ActionEvent e) {
         System.out.println("Generator");
-        Main.drawMandelbrot( pMandelbrotViewer );
+        Main.drawMandelbrot( pMandelbrotViewer, Double.parseDouble(eReelMin.getText()), Double.parseDouble(eReelMax.getText()),
+                Double.parseDouble(eImagMin.getText()), Double.parseDouble(eImagMax.getText()) );
     }
 
     private void bSaveActionPerformed(ActionEvent e) {

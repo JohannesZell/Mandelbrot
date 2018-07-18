@@ -50,7 +50,7 @@ public class MandelbrotPanel extends JPanel {
      * Paints the local image on the panel if it's changed
      */
     @Override
-    protected void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(this.image, 0, 0, this);
     }
