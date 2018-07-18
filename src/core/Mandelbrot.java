@@ -1,3 +1,4 @@
+package core;
 import java.awt.image.BufferedImage;
 
 public final class Mandelbrot {

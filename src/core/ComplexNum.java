@@ -1,3 +1,4 @@
+package core;
 /*
  * Represents a complex number consisting of a imaginary, and a real part.
  */
