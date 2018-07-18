@@ -22,7 +22,7 @@ public class MandelbrotFrame extends JFrame {
 
     public MandelbrotFrame() {
         initComponents();
-        Main.drawMandelbrot( pMandelbrotViewer, 10, Double.parseDouble(eReelMax.getText()),
+        Main.drawMandelbrot( pMandelbrotViewer, Double.parseDouble(eReelMin.getText()), Double.parseDouble(eReelMax.getText()),
                 Double.parseDouble(eImagMin.getText()), Double.parseDouble(eImagMax.getText()) );
         //daf<s
     }

@@ -33,6 +33,7 @@ public class Main {
 
     public static void drawMandelbrot( MandelbrotPanel mandelbrotViewer, double xmin, double xmax, double ymin, double ymax) {
         //MandelbrotViewer.paintComponent( img );
+
         try {
             //man.generateMandelbrotImage( img, center.re + offset, center.re - offset, center.im + offset, center.im - offset );
             man.generateMandelbrotImage( img, xmin, xmax, ymin, ymax );
@@ -43,6 +44,6 @@ public class Main {
         mandelbrotViewer.setImage( img );
         mandelbrotViewer.loadImage( img );
         mandelbrotViewer.repaint();
-        mandelbrotViewer.paintComponent( img.getGraphics() );
+        //mandelbrotViewer.paintComponent( img.getGraphics() );
     }
 }

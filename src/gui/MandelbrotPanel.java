@@ -32,6 +32,10 @@ public class MandelbrotPanel extends JPanel {
             }  */
     }
 
+    public void clearAndRegenerate() {
+        super.paint( getGraphics() );
+    }
+
     /**
      * Sets the local image
      * @param img Actual BufferedImage
@@ -41,9 +45,10 @@ public class MandelbrotPanel extends JPanel {
     }
 
     public void loadImage( BufferedImage img ) {
-        JLabel picLabel = new JLabel(new ImageIcon(img.getScaledInstance(800,800,0)));
-        picLabel.setBounds(0,0,800,800);
-        add(picLabel);
+        clearAndRegenerate();
+        //JLabel picLabel = new JLabel(new ImageIcon(img.getScaledInstance(800,800,0)));
+        //picLabel.setBounds(0,0,800,800);
+        //add(picLabel);
     }
 
     /**
