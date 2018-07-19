@@ -23,6 +23,8 @@ public class MandelbrotFrame extends JFrame {
     private  Viewport viewport;
     private int sideLength;
     private double xMin, xMax, yMin, yMax, zoomFactor;
+    private double total_x = xMax - xMin;
+    private double total_y = yMax - yMin;
 
 
     public MandelbrotFrame() {
@@ -32,7 +34,6 @@ public class MandelbrotFrame extends JFrame {
         this.yMin = Double.parseDouble(eImagMin.getText());
         this.yMax = Double.parseDouble(eImagMax.getText());
         this.zoomFactor = Double.parseDouble(eZoom.getText());
-
         //Main.drawMandelbrot( pMandelbrotViewer, xMin, xMax, yMin, yMax );
         Main.drawMandelbrot( pMandelbrotViewer, xMin, xMax, yMin, yMax );
     }
@@ -62,11 +63,11 @@ public class MandelbrotFrame extends JFrame {
     private void bSaveActionPerformed(ActionEvent e) {
         FileDialog fd = new FileDialog(this, "Bitte Speicherort auswählen",FileDialog.SAVE);
         fd.setVisible(true);
-        String chosenDir = fd.getDirectory(); // gewaehltes Verzeichnis
-        String chosenFile = fd.getFile();     // gewaehlter Dateiname
+        String chosenDir = fd.getDirectory();
+        String chosenFile = fd.getFile();
         File file = new File(chosenDir + chosenFile);
-        if (chosenDir == null || chosenFile == null) // beide == null bedeutet
-            System.out.println("Du hast den Dialog abgebrochen!"); // Abbruch!
+        if (chosenDir == null || chosenFile == null)
+            System.out.println("Du hast den Dialog abgebrochen!");
         else {
             try {
                 ImageIO.write(pMandelbrotViewer.getImage(), "jpg", file);
@@ -77,10 +78,15 @@ public class MandelbrotFrame extends JFrame {
         fd.dispose();
         }
 
-    public void zoom(double centerX, double centerY) {
-        this.viewport.zoom(centerX, centerY);
-        this.generateImage();
+    public void zoom() {
+        xMin = xMin / 1.1;
+        yMin = yMin / 1.1;
+        xMax = xMax / 1.1;
+        yMax = yMax / 1.1;
+        Main.drawMandelbrot( pMandelbrotViewer, xMin, xMax, yMin, yMax );
+        pMandelbrotViewer.repaint();
     }
+
 
     private void initComponents() {
         this.viewport = new Viewport(this.SIDE_LENGTH, xMin, xMax, yMin, yMax, zoomFactor);

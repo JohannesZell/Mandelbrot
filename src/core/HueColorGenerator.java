@@ -1,11 +1,12 @@
 package core;
 import java.awt.Color;
-/*
+/**
+ * @author Johannes Zell
  * Class for generating the color for the Mandelbrot set.
  */
 public class HueColorGenerator implements ColorGenerator {
 
-    /*
+    /**
      * @see ColorGenerator#getColorFor(int, int)
      */
     public Color getColorFor(int iterations, int maxIterations) {

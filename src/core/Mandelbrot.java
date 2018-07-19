@@ -1,91 +1,62 @@
 package core;
 import java.awt.image.BufferedImage;
-/*
+/**
+ * @autor Johannes Zell
  * class for generating Mandelbrot and Julia set
  */
 public final class Mandelbrot {
 
-    /*
+    /**
      * constructor of the mandelbrot class
      */
     public Mandelbrot() {
     }
-
-    /*
-     * maximum iterations
-     */
-    public static final int maxIterations = 100;
-
-    /*
+    /**
      *
      */
     public static final double infinity = 16;
 
-    /*
+    /**
      * Buffered image for the Mandelbrot set
      */
     private BufferedImage image;
 
-    /*
-     * complex number for the julia set
+    /**
+     * maximum iterations
      */
-    private ComplexNum setJulia;
+    public static final int maxIterations = 100;
 
-    /*
+    /**
      * min value x-axis
      */
     private double xMin;
 
-    /*
+    /**
      * max value x-axis
      */
     private double xMax;
 
-    /*
+    /**
      * min value y-axis
      */
     private double yMin;
 
-    /*
+    /**
      * max value y-axis
      */
     private double yMax;
 
-    /*
+    /**
      * new ColorGenerator
      */
     private ColorGenerator colorGenerator;
 
-
-    //private ComplexNum juliaConstant;
-
-    /*
+    /**
      * Value to check if the Julia set should be generated
      */
     private boolean renderJulia;
 
-    /*
-     *
-     */
-    private class Generating implements Runnable{
-
-        public Generating() {
-
-        }
-        /*
-         * run method that is called when a new thread is started
-         * @see java.lang.Runnable#run()
-         */
-        public void run() {
-            if (renderJulia == true) {
-                generateJulia();
-            } else {
-                generateMandelbrot();
-            }
-        }
-    }
-
-    /*
+    /**
      * Method that generates the Mandelbrot set
      */
     public void generateMandelbrot() {
@@ -112,11 +83,12 @@ public final class Mandelbrot {
             }
         }
     }
-    /*
+    /**
      * Method that generates the Julia set
      */
     public void generateJulia(){
         ComplexNum z = new ComplexNum(0, 0);
+        ComplexNum setJulia = new ComplexNum(-0.8342, 0.0145);
         int iterations;
         int x, y;
         for (x = 0; x < image.getWidth(); x++) {
@@ -135,8 +107,13 @@ public final class Mandelbrot {
         }
     }
 
-    /*
+    /**
      * Method that sets local variables and start a new Generating thread
+     * @param image BufferedImage on which is drawn
+     * @param xMin xMin value form the axis
+     * @param xMax xMax value from the axis
+     * @param yMin yMin value from the axis
+     * @param yMax yMax value from the axis
      */
     public void generateMandelbrotImage(BufferedImage image, double xMin, double xMax, double yMin, double yMax) throws InterruptedException {
         this.image = image;
@@ -151,31 +128,58 @@ public final class Mandelbrot {
         thread.join();
     }
 
-    /*
-     * Method that sets local variables and start a new Generating thread
+    /**
+     * Method that sets local variables and start a new thread
+     * @param image BufferedImage on which is drawn
+     * @param xMin xMin value from the axis
+     * @param xMax xMax value from the axis
+     * @param yMin yMin value form the axis
+     * @param yMax yMax value from the axis
      */
-    public void generateJuliaImage(BufferedImage image, double xMin, double xMax, double yMin, double yMax, ComplexNum julia, ColorGenerator colorGenerator) {
+    public void generateJuliaImage(BufferedImage image, double xMin, double xMax, double yMin, double yMax) {
         this.image = image;
         this.xMin = xMin;
         this.xMax = xMax;
         this.yMin = yMin;
         this.yMax = yMax;
-        this.renderJulia = true;
-        //this.juliaConstant = julia;
-        this.colorGenerator = colorGenerator;
-        this.setJulia = julia;
+        this.colorGenerator = new HueColorGenerator();
         Thread thread = new Thread(new Generating());
         thread.start();
     }
 
+    /**
+     * Maps the input value to the corresponding axis
+     * @param in x or y value to be maped
+     * @param inMin min value
+     * @param inMax the height or width from the image
+     * @param mapMin x or y min value from the axis
+     * @param mapMax x or y max value from the axis
+     * @return
+     */
     public static double map(double in, double inMin, double inMax, double mapMin, double mapMax) {
         return (in - inMin) * (mapMax - mapMin) / (inMax - inMin) + mapMin;
     }
 
+    /**
+     * private class which implements the Runnable interface
+     */
+    private class Generating implements Runnable{
+        /**
+         * constructor
+         */
+        public Generating() {
+        }
 
-    public static double map(double in, double inMax, double mapMin, double mapMax) {
-        return map(in, 0, inMax, mapMin, mapMax);
+        /**
+         * run method that is called when a new thread is started
+         * @see java.lang.Runnable#run()
+         */
+        public void run() {
+            if (renderJulia == true) {
+                generateJulia();
+            } else {
+                generateMandelbrot();
+            }
+        }
     }
-
-
 }

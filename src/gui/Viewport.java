@@ -4,10 +4,13 @@ package gui;
  * Class which converts the pictures coordinate system to the coordinate system of the complex number ones
  * @author Ronny Kohlhaus
  */
+
 public class Viewport {
 
     private int sideLength;
     private double xMin, xMax, yMin, yMax, zoomFactor;
+    private double total_x;
+    private double total_y;
     private double viewPortX, viewPortY;
 
     /**
@@ -20,19 +23,16 @@ public class Viewport {
         this.xMax = xMax;
         this.yMin = yMin;
         this.yMax = yMax;
+        this.total_x = xMax - xMin;
+        this.total_y = yMin - yMax;
         this.zoomFactor = zoomFactor;
     }
 
-    public void zoom(double centerX, double centerY) {
-        double[] centerCoordinates = this.getCoordinates(centerX, centerY);
-        double newXRadius, newYRadius;
-            newXRadius = (getXLength()/this.zoomFactor)/2;
-            newYRadius = (getYLength()/this.zoomFactor)/2;
-
-        this.xMin = centerCoordinates[0]-newXRadius;
-        this.xMax = centerCoordinates[0]+newXRadius;
-        this.yMin = centerCoordinates[1]-newYRadius;
-        this.yMax = centerCoordinates[1]+newYRadius;
+    public void zoom() {
+        xMin += total_x / 30;
+        yMin += total_y / 30;
+        xMax -= total_x / 30;
+        yMax -= total_y / 30;
     }
 
     public double[] getCoordinates(double x, double y) {

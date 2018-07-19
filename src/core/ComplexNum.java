@@ -1,27 +1,28 @@
 package core;
-/*
+/**
  * class to manage the calculation with complex numbers
  */
 public class ComplexNum {
 
-    /*
+    /**
      * Imaginary part of the complex number
      */
     public double im;
-    /*
+    /**
      * Real part of the complex number
      */
     public double re;
 
 
-    /*
-     * Set a complex number and initialize it with 0
+    /**
+     * Constructor that generates a new complex number
      */
     public ComplexNum() {
+
         this(0, 0);
     }
 
-    /*
+    /**
      * Generates a new complex number
      */
     public ComplexNum(double re, double im) {
@@ -29,14 +30,14 @@ public class ComplexNum {
         this.im = im;
     }
 
-    /*
+    /**
      * returns sum of two complex numbers
      */
     public ComplexNum add(ComplexNum cn) {
         return new ComplexNum(this.re + cn.re, this.im + cn.im);
     }
 
-    /*
+    /**
      *  returns the product of two complex numbers
      */
     public ComplexNum multiply(ComplexNum cn) {
@@ -46,7 +47,7 @@ public class ComplexNum {
         );
     }
 
-    /*
+    /**
      * returns the norm of the complex number
      */
     public double norm() {

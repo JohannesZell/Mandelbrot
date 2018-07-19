@@ -1,5 +1,9 @@
 package gui;
+import core.Main;
+
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 
@@ -9,6 +13,7 @@ import javax.swing.*;
 public class MandelbrotPanel extends JPanel {
 
     private static final long serialVersionUID = 42L;
+    private Main main = new Main();
 
     public BufferedImage getImage() {
         return image;
@@ -18,7 +23,7 @@ public class MandelbrotPanel extends JPanel {
 
     public MandelbrotPanel( int sideLength ) {
         this.setPreferredSize( new Dimension( sideLength, sideLength ));
-        this.addMouseListener( new MouseListener() );
+        this.addMouseListener(listener);
 
         /*BufferedImage myPicture = null;
         try {
@@ -36,6 +41,33 @@ public class MandelbrotPanel extends JPanel {
                 ex.printStackTrace();
             }  */
     }
+
+    MouseListener listener = new MouseListener() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            main.zoom();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+    };
 
     public void clearAndRegenerate() {
         super.paint( getGraphics() );
