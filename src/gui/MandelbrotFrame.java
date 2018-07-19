@@ -25,7 +25,7 @@ public class MandelbrotFrame extends JFrame {
         }
 
     }
-
+    //Scheiß Github
     private final int SIDE_LENGTH = 800;
 
     public MandelbrotFrame() {
