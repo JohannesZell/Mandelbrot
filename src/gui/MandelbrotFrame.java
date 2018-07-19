@@ -24,7 +24,7 @@ public class MandelbrotFrame extends JFrame {
         }
 
     }*/
-*/
+
     private static MandelbrotFrame frame = new MandelbrotFrame();
 
     private final int SIDE_LENGTH = 800;
