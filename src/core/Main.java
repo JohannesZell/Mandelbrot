@@ -34,7 +34,7 @@ public class Main {
 
         try {
             man.generateMandelbrotImage( img, xmin, xmax, ymin, ymax );
-            man.generateJuliaImage(img, -2, 1.5, -2, 2);
+            //man.generateJuliaImage(img, -2, 1.5, -2, 2);
         } catch (InterruptedException e1) {
             e1.printStackTrace();
         }
