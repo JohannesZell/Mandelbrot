@@ -55,8 +55,12 @@ public class MandelbrotFrame extends JFrame {
 
     private void bGenerateActionPerformed(ActionEvent e) {
         System.out.println("Generator");
-        Main.drawMandelbrot( pMandelbrotViewer, Double.parseDouble(eReelMin.getText()), Double.parseDouble(eReelMax.getText()),
-                Double.parseDouble(eImagMin.getText()), Double.parseDouble(eImagMax.getText()) );
+        this.xMin = Double.parseDouble(eReelMin.getText());
+        this.xMax = Double.parseDouble(eReelMax.getText());
+        this.yMin = Double.parseDouble(eImagMin.getText());
+        this.yMax = Double.parseDouble(eImagMax.getText());
+        this.zoomFactor = Double.parseDouble(eZoom.getText());
+        Main.drawMandelbrot( pMandelbrotViewer, xMin, xMax, yMin, yMax );
         //generateImage();
     }
 
@@ -79,10 +83,10 @@ public class MandelbrotFrame extends JFrame {
         }
 
     public void zoom() {
-        xMin = xMin / 1.1;
-        yMin = yMin / 1.1;
-        xMax = xMax / 1.1;
-        yMax = yMax / 1.1;
+        xMin = (xMin / zoomFactor) + total_x / 130;
+        yMin = yMin / zoomFactor;
+        xMax = (xMax / zoomFactor) + total_x / 130;
+        yMax = yMax / zoomFactor;
         Main.drawMandelbrot( pMandelbrotViewer, xMin, xMax, yMin, yMax );
         pMandelbrotViewer.repaint();
     }
