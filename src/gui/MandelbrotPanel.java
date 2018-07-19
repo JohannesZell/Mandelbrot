@@ -9,6 +9,11 @@ import javax.swing.*;
 public class MandelbrotPanel extends JPanel {
 
     private static final long serialVersionUID = 42L;
+
+    public BufferedImage getImage() {
+        return image;
+    }
+
     private BufferedImage image;
 
     public MandelbrotPanel( int sideLength ) {

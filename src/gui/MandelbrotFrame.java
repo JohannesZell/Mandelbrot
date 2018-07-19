@@ -1,4 +1,5 @@
 package gui;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import core.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -6,13 +7,16 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 import java.awt.image.RenderedImage;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.tools.JavaFileManager;
 
 /**
  * @author Ronny Kohlhaus
  */
 public class MandelbrotFrame extends JFrame {
+
 
     private class thehandler implements ActionListener {
 
@@ -38,19 +42,22 @@ public class MandelbrotFrame extends JFrame {
     }
 
     private void bSaveActionPerformed(ActionEvent e) {
-        /* Hier die Methode zum Speichern */
-        JFileChooser fileChooser = new JFileChooser();
-        int returnVal = fileChooser.showOpenDialog(null);
-        if ( returnVal == JFileChooser.APPROVE_OPTION ){
-            File file = fileChooser.getSelectedFile();
+        FileDialog fd = new FileDialog(this, "Bitte Speicherort auswählen",FileDialog.SAVE);
+        fd.setVisible(true);
+        String chosenDir = fd.getDirectory(); // gewaehltes Verzeichnis
+        String chosenFile = fd.getFile();     // gewaehlter Dateiname
+        File file = new File(chosenDir + chosenFile);
+        if (chosenDir == null || chosenFile == null) // beide == null bedeutet
+            System.out.println("Du hast den Dialog abgebrochen!"); // Abbruch!
+        else {
             try {
-                ImageIO.write((RenderedImage) pMandelbrotViewer.getGraphics(), "jpg", file);//assuming you want a jpg, and BufferedImage variable name is image
+                ImageIO.write(pMandelbrotViewer.getImage(), "jpg", file);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         }
-        System.out.println("Speichern abgeschlossen");
-    }
+        fd.dispose();
+        }
 
     private void initComponents() {
         bGenerate = new JButton();
