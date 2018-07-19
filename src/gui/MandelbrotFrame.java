@@ -16,22 +16,13 @@ import javax.tools.JavaFileManager;
  * @author Ronny Kohlhaus
  */
 public class MandelbrotFrame extends JFrame {
-/*
-    private class thehandler implements ActionListener {
 
-        public void actionPerformed( ActionEvent event ) {
-            //String
-        }
-
-    }*/
-
-    private static MandelbrotFrame frame = new MandelbrotFrame();
+    //private static MandelbrotFrame frame = new MandelbrotFrame();
 
     private final int SIDE_LENGTH = 800;
     private  Viewport viewport;
     private int sideLength;
     private double xMin, xMax, yMin, yMax, zoomFactor;
-    //private final
 
 
     public MandelbrotFrame() {
@@ -44,15 +35,14 @@ public class MandelbrotFrame extends JFrame {
 
         //Main.drawMandelbrot( pMandelbrotViewer, xMin, xMax, yMin, yMax );
         Main.drawMandelbrot( pMandelbrotViewer, xMin, xMax, yMin, yMax );
-        //daf<s
     }
-
+/*
     public static MandelbrotFrame getFrame() {
         if (MandelbrotFrame.frame == null) {
             MandelbrotFrame.frame = new MandelbrotFrame();
         }
         return MandelbrotFrame.frame;
-    }
+    }*/
 
     public void generateImage() {
         Main.drawMandelbrot( pMandelbrotViewer, xMin, xMax, yMin, yMax );
