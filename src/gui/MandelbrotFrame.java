@@ -87,10 +87,16 @@ public class MandelbrotFrame extends JFrame {
     public void zoom(int x, int y) {
         this.zoomFactor = Double.parseDouble(eZoom.getText());
         System.out.println(xMin);
+
         xMin = (xMin / zoomFactor) + (((total_x / getWidth()) * x) / 2);
         yMin = (yMin / zoomFactor) + (((total_y / getHeight()) * y) / 2);
         xMax = (xMax / zoomFactor) + (((total_x / getWidth()) * x) / 2);
         yMax = (yMax / zoomFactor) + (((total_y / getHeight()) * y) / 2);
+//        xMin = (((total_x / getWidth()) * x) * zoomFactor);
+//        yMin = (((total_y / getHeight()) * y) * zoomFactor);
+//        xMax = (((total_x / getWidth()) * x) / zoomFactor);
+//        yMax = (((total_y / getHeight()) * y) / zoomFactor);
+
         System.out.println(total_x);
         System.out.println((total_x / getWidth()) * x);
         total_x = xMax - xMin;
