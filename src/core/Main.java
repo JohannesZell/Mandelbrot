@@ -12,15 +12,15 @@ public class Main {
 
     private static Mandelbrot man = new Mandelbrot();
 
-    private static double offset = 2;
+    //private static double offset = 2;
 
-    private static ComplexNum center = new ComplexNum(0, 0);
+    //private static ComplexNum center = new ComplexNum(0, 0);
 
     private static BufferedImage img = new BufferedImage(800, 800, BufferedImage.TYPE_INT_RGB);
 
     private static MandelbrotFrame frame = new MandelbrotFrame();
 
-    ComplexNum c = new ComplexNum(-0.8342, 0.0145);
+    //ComplexNum c = new ComplexNum(-0.8342, 0.0145);
 
     public static void main(String[] args) {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

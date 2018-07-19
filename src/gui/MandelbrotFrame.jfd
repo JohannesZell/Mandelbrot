@@ -63,7 +63,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "eZoom"
-				"text": "4,0"
+				"text": "4.0"
 				"horizontalAlignment": 0
 				"toolTipText": "Zoomfaktor beim Klick in die Anzeigefläche"
 			} )

@@ -4,6 +4,10 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  * @author Ronny Kohlhaus
@@ -35,6 +39,16 @@ public class MandelbrotFrame extends JFrame {
 
     private void bSaveActionPerformed(ActionEvent e) {
         /* Hier die Methode zum Speichern */
+        JFileChooser fileChooser = new JFileChooser();
+        int returnVal = fileChooser.showOpenDialog(null);
+        if ( returnVal == JFileChooser.APPROVE_OPTION ){
+            File file = fileChooser.getSelectedFile();
+            try {
+                ImageIO.write((RenderedImage) pMandelbrotViewer.getGraphics(), "jpg", file);//assuming you want a jpg, and BufferedImage variable name is image
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
         System.out.println("Speichern abgeschlossen");
     }
 
@@ -198,5 +212,4 @@ public class MandelbrotFrame extends JFrame {
     private JLabel lZoom;
     private JTextField eZoom;
     private MandelbrotPanel pMandelbrotViewer;
-
 }
