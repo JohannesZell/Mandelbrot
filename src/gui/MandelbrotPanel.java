@@ -45,7 +45,7 @@ public class MandelbrotPanel extends JPanel {
     MouseListener listener = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent e) {
-            main.zoom();
+            main.zoom(e.getX(), e.getY());
         }
 
         @Override

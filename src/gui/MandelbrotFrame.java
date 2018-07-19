@@ -82,11 +82,12 @@ public class MandelbrotFrame extends JFrame {
         fd.dispose();
         }
 
-    public void zoom() {
-        xMin = (xMin / zoomFactor) + total_x / 130;
-        yMin = yMin / zoomFactor;
-        xMax = (xMax / zoomFactor) + total_x / 130;
-        yMax = yMax / zoomFactor;
+    public void zoom(int x, int y) {
+        this.zoomFactor = Double.parseDouble(eZoom.getText());
+        xMin = (xMin / zoomFactor) + ((total_x / getWidth()) * x);
+        yMin = (yMin / zoomFactor) + ((total_y / getHeight()) * y);
+        xMax = (xMax / zoomFactor) + ((total_x / getWidth()) * x);
+        yMax = (yMax / zoomFactor) + ((total_y / getHeight()) * y);
         Main.drawMandelbrot( pMandelbrotViewer, xMin, xMax, yMin, yMax );
         pMandelbrotViewer.repaint();
     }

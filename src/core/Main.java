@@ -44,8 +44,8 @@ public class Main {
         //mandelbrotViewer.paintComponent( img.getGraphics() );
     }
 
-    public void zoom(){
+    public void zoom(int x, int y){
         System.out.println("Main");
-        frame.zoom();
+        frame.zoom(x,y);
     }
 }
