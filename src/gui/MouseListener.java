@@ -12,7 +12,9 @@ public class MouseListener implements java.awt.event.MouseListener {
         int xPosition = e.getX();
         int yPosition = e.getY();
 
-        if( e.getButton() == LEFT_MOUSE_BUTTON ) ;
+        /* zooms in */
+        if( e.getButton() == LEFT_MOUSE_BUTTON )
+            MandelbrotFrame.getFrame().zoom(xPosition, yPosition);
     }
 
     @Override

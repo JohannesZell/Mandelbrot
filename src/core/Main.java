@@ -18,14 +18,12 @@ public class Main {
 
     private static BufferedImage img = new BufferedImage(800, 800, BufferedImage.TYPE_INT_RGB);
 
-    private static MandelbrotFrame frame = new MandelbrotFrame();
+    //private static MandelbrotFrame frame = new MandelbrotFrame();
 
     //ComplexNum c = new ComplexNum(-0.8342, 0.0145);
 
     public static void main(String[] args) {
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        MandelbrotFrame frame = new MandelbrotFrame();
 
     }
 

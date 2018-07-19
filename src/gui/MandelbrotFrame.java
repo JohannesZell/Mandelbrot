@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
  * @author Ronny Kohlhaus
  */
 public class MandelbrotFrame extends JFrame {
-
+/*
     private class thehandler implements ActionListener {
 
         public void actionPerformed( ActionEvent event ) {
@@ -21,20 +21,49 @@ public class MandelbrotFrame extends JFrame {
         }
 
     }
+*/
+    private static MandelbrotFrame frame = new MandelbrotFrame();
 
     private final int SIDE_LENGTH = 800;
+    private  Viewport viewport;
+    private int sideLength;
+    private double xMin, xMax, yMin, yMax, zoomFactor;
+    //private final
+
 
     public MandelbrotFrame() {
         initComponents();
-        Main.drawMandelbrot( pMandelbrotViewer, Double.parseDouble(eReelMin.getText()), Double.parseDouble(eReelMax.getText()),
-                Double.parseDouble(eImagMin.getText()), Double.parseDouble(eImagMax.getText()) );
+        this.xMin = Double.parseDouble(eReelMin.getText());
+        this.xMax = Double.parseDouble(eReelMax.getText());
+        this.yMin = Double.parseDouble(eImagMin.getText());
+        this.yMax = Double.parseDouble(eImagMax.getText());
+        this.zoomFactor = Double.parseDouble(eZoom.getText());
+
+        //Main.drawMandelbrot( pMandelbrotViewer, xMin, xMax, yMin, yMax );
+        Main.drawMandelbrot( pMandelbrotViewer, xMin, xMax, yMin, yMax );
         //daf<s
+    }
+
+    public static MandelbrotFrame getFrame() {
+        if (MandelbrotFrame.frame == null) {
+            MandelbrotFrame.frame = new MandelbrotFrame();
+        }
+        return MandelbrotFrame.frame;
+    }
+
+    public void generateImage() {
+        Main.drawMandelbrot( pMandelbrotViewer, xMin, xMax, yMin, yMax );
+    }
+
+    public Viewport getViewport() {
+        return this.viewport;
     }
 
     private void bGenerateActionPerformed(ActionEvent e) {
         System.out.println("Generator");
         Main.drawMandelbrot( pMandelbrotViewer, Double.parseDouble(eReelMin.getText()), Double.parseDouble(eReelMax.getText()),
                 Double.parseDouble(eImagMin.getText()), Double.parseDouble(eImagMax.getText()) );
+        //generateImage();
     }
 
     private void bSaveActionPerformed(ActionEvent e) {
@@ -52,7 +81,13 @@ public class MandelbrotFrame extends JFrame {
         System.out.println("Speichern abgeschlossen");
     }
 
+    public void zoom(double centerX, double centerY) {
+        this.viewport.zoom(centerX, centerY);
+        this.generateImage();
+    }
+
     private void initComponents() {
+        this.viewport = new Viewport(this.SIDE_LENGTH, xMin, xMax, yMin, yMax, zoomFactor);
         bGenerate = new JButton();
         bSave = new JButton();
         eReelMin = new JTextField();
@@ -71,7 +106,11 @@ public class MandelbrotFrame extends JFrame {
         this.setResizable(false);
         this.setTitle("Mandelbrot-Menge");
         this.setName("this");
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.pack();
+        this.setVisible(true);
         Container contentPane = getContentPane();
+
 
         //---- bGenerate ----
         bGenerate.setText("Generieren");
@@ -124,7 +163,7 @@ public class MandelbrotFrame extends JFrame {
         lZoom.setName("lZoom");
 
         //---- eZoom ----
-        eZoom.setText("4,0");
+        eZoom.setText("4.0");
         eZoom.setHorizontalAlignment(SwingConstants.CENTER);
         eZoom.setToolTipText("Zoomfaktor beim Klick in die Anzeigefl\u00e4che");
         eZoom.setName("eZoom");
@@ -148,11 +187,8 @@ public class MandelbrotFrame extends JFrame {
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(bSave))
                                 .addComponent(lReelMax, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lReelMin)))
-                        //.addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                           // .addContainerGap()
-                            .addComponent(lImagMax))
-                           // .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)))
+                                .addComponent(lReelMin)
+                                .addComponent(lImagMax))))
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                         .addComponent(eReelMin, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
                         .addComponent(eImagMin, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
