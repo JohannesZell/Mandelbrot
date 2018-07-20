@@ -20,11 +20,12 @@ public class MandelbrotFrame extends JFrame {
     //private static MandelbrotFrame frame = new MandelbrotFrame();
 
     private final int SIDE_LENGTH = 800;
-    private  Viewport viewport;
+
     private int sideLength;
     private double xMin, xMax, yMin, yMax, zoomFactor;
     private double total_x;
     private double total_y;
+    private Viewport viewport;
 
 
     public MandelbrotFrame() {
@@ -34,6 +35,7 @@ public class MandelbrotFrame extends JFrame {
         this.yMin = Double.parseDouble(eImagMin.getText());
         this.yMax = Double.parseDouble(eImagMax.getText());
         this.zoomFactor = Double.parseDouble(eZoom.getText());
+        viewport = new Viewport(SIDE_LENGTH, xMin, xMax, yMin, yMax, zoomFactor);
         total_x = xMax - xMin;
         total_y = yMax - yMin;
         //Main.drawMandelbrot( pMandelbrotViewer, xMin, xMax, yMin, yMax );
@@ -62,6 +64,7 @@ public class MandelbrotFrame extends JFrame {
         this.yMin = Double.parseDouble(eImagMin.getText());
         this.yMax = Double.parseDouble(eImagMax.getText());
         this.zoomFactor = Double.parseDouble(eZoom.getText());
+        viewport.reset( xMin, xMax, yMin, yMax, zoomFactor );
         Main.drawMandelbrot( pMandelbrotViewer, xMin, xMax, yMin, yMax );
         //generateImage();
     }
@@ -85,18 +88,30 @@ public class MandelbrotFrame extends JFrame {
         }
 
     public void zoom(int x, int y) {
+        this.viewport.zoom(x, y);
+        Main.drawMandelbrot(pMandelbrotViewer, viewport.getxMin(), viewport.getxMax(),
+                viewport.getyMin(), viewport.getyMax());
+        /*
         this.zoomFactor = Double.parseDouble(eZoom.getText());
         System.out.println(xMin);
-        xMin = (xMin / zoomFactor) + (((total_x / getWidth()) * x) / 2);
-        yMin = (yMin / zoomFactor) + (((total_y / getHeight()) * y) / 2);
+
+
+        xMin = (xMin / zoomFactor) - (((total_x / getWidth()) * x) / 2);
+        yMin = (yMin / zoomFactor) - (((total_y / getHeight()) * y) / 2);
         xMax = (xMax / zoomFactor) + (((total_x / getWidth()) * x) / 2);
         yMax = (yMax / zoomFactor) + (((total_y / getHeight()) * y) / 2);
+
+        xMin = viewport.g- (((total_x / getWidth()) * x) / 2);
+        yMin = (yMin / zoomFactor) - (((total_y / getHeight()) * y) / 2);
+        xMax = (xMax / zoomFactor) + (((total_x / getWidth()) * x) / 2);
+        yMax = (yMax / zoomFactor) + (((total_y / getHeight()) * y) / 2);
+
         System.out.println(total_x);
         System.out.println((total_x / getWidth()) * x);
         total_x = xMax - xMin;
         total_y = yMax - yMin;
         Main.drawMandelbrot( pMandelbrotViewer, xMin, xMax, yMin, yMax );
-        pMandelbrotViewer.repaint();
+        pMandelbrotViewer.repaint();*/
     }
 
 
