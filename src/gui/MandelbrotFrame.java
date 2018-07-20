@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
+import javax.swing.JOptionPane;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -19,10 +20,7 @@ public class MandelbrotFrame extends JFrame {
     private static final long serialVersionUID = 42L;
     private static MandelbrotFrame frame = new MandelbrotFrame();
     private final int SIDE_LENGTH = 800;
-    private int sideLength;
     private double xMin, xMax, yMin, yMax, zoomFactor;
-    private double total_x;
-    private double total_y;
     private Viewport viewport;
 
     //---Declaration of the components---
@@ -45,15 +43,13 @@ public class MandelbrotFrame extends JFrame {
      */
     public MandelbrotFrame() {
         initComponents();
-        this.xMin = Double.parseDouble(eReelMin.getText());
-        this.xMax = Double.parseDouble(eReelMax.getText());
-        this.yMin = Double.parseDouble(eImagMin.getText());
-        this.yMax = Double.parseDouble(eImagMax.getText());
-        this.zoomFactor = Double.parseDouble(eZoom.getText());
-        viewport = new Viewport(SIDE_LENGTH, xMin, xMax, yMin, yMax, zoomFactor);
-        total_x = xMax - xMin;
-        total_y = yMax - yMin;
-        Main.drawMandelbrot(pMandelbrotViewer, xMin, xMax, yMin, yMax);
+        this.xMin = Double.parseDouble( eReelMin.getText() );
+        this.xMax = Double.parseDouble( eReelMax.getText() );
+        this.yMin = Double.parseDouble( eImagMin.getText() );
+        this.yMax = Double.parseDouble( eImagMax.getText() );
+        this.zoomFactor = Double.parseDouble( eZoom.getText() );
+        viewport = new Viewport( SIDE_LENGTH, xMin, xMax, yMin, yMax, zoomFactor );
+        Main.drawMandelbrot( pMandelbrotViewer, xMin, xMax, yMin, yMax );
     }
 
     /**
@@ -61,42 +57,48 @@ public class MandelbrotFrame extends JFrame {
      * @return returns the MandelbrotFrame
      */
     public static MandelbrotFrame getFrame() {
-        if (MandelbrotFrame.frame == null) {
+        if ( MandelbrotFrame.frame == null ) {
             MandelbrotFrame.frame = new MandelbrotFrame();
         }
         return MandelbrotFrame.frame;
     }
 
     /**
-     * ActionListener for the bGenerate button object
+     * ActionListener for the bGenerate button object which checks, if the value is type double.
+     * Shows information message in case user has put a false value in it.
      * @param e
      */
     private void bGenerateActionPerformed(ActionEvent e) {
-        this.xMin = Double.parseDouble(eReelMin.getText());
-        this.xMax = Double.parseDouble(eReelMax.getText());
-        this.yMin = Double.parseDouble(eImagMin.getText());
-        this.yMax = Double.parseDouble(eImagMax.getText());
-        this.zoomFactor = Double.parseDouble(eZoom.getText());
-        viewport.reset(xMin, xMax, yMin, yMax, zoomFactor);
-        Main.drawMandelbrot(pMandelbrotViewer, xMin, xMax, yMin, yMax);
+        try {
+            this.xMin = Double.parseDouble( eReelMin.getText() );
+            this.xMax = Double.parseDouble( eReelMax.getText() );
+            this.yMin = Double.parseDouble( eImagMin.getText() );
+            this.yMax = Double.parseDouble( eImagMax.getText() );
+            this.zoomFactor = Double.parseDouble( eZoom.getText() );
+        } catch ( NumberFormatException e1 ) {
+            JOptionPane.showMessageDialog( null,"Bitte geben Sie nur ganze Zahlen oder " +
+                            "Dezimalwerte (getrennt mit Punkt) ein!", "Fehlerhafter Wert",JOptionPane.INFORMATION_MESSAGE );
+        }
+        viewport.reset( xMin, xMax, yMin, yMax, zoomFactor );
+        Main.drawMandelbrot( pMandelbrotViewer, xMin, xMax, yMin, yMax );
     }
 
     /**
      * ActionListener for the bSave button object
      * @param e
      */
-    private void bSaveActionPerformed(ActionEvent e) {
-        FileDialog fd = new FileDialog(this, "Bitte Speicherort auswählen",FileDialog.SAVE);
-        fd.setVisible(true);
+    private void bSaveActionPerformed( ActionEvent e ) {
+        FileDialog fd = new FileDialog( this, "Bitte Speicherort auswählen",FileDialog.SAVE );
+        fd.setVisible( true );
         String chosenDir = fd.getDirectory();
         String chosenFile = fd.getFile();
-        File file = new File(chosenDir + chosenFile);
-        if (chosenDir == null || chosenFile == null)
+        File file = new File( chosenDir + chosenFile );
+        if ( chosenDir == null || chosenFile == null )
             System.out.println("Du hast den Dialog abgebrochen!");
         else {
             try {
-                ImageIO.write(pMandelbrotViewer.getImage(), "jpg", file);
-            } catch (IOException e1) {
+                ImageIO.write( pMandelbrotViewer.getImage(), "jpg", file );
+            } catch ( IOException e1 ) {
                 e1.printStackTrace();
             }
         }
@@ -109,21 +111,21 @@ public class MandelbrotFrame extends JFrame {
      * @param x x-Value of the mouse cursor
      * @param y y-Value of the mouse cursor
      */
-    public void zoom(int x, int y) {
-        this.viewport.zoom(x, y);
-        Main.drawMandelbrot(pMandelbrotViewer, viewport.getxMin(), viewport.getxMax(),
-                viewport.getyMin(), viewport.getyMax());
-        eReelMin.setText(String.valueOf(viewport.getxMin()));
-        eReelMax.setText(String.valueOf(viewport.getxMax()));
-        eImagMin.setText(String.valueOf(viewport.getyMin()));
-        eImagMax.setText(String.valueOf(viewport.getyMax()));
+    public void zoom( int x, int y ) {
+        this.viewport.zoom( x, y );
+        Main.drawMandelbrot( pMandelbrotViewer, viewport.getxMin(), viewport.getxMax(),
+                viewport.getyMin(), viewport.getyMax() );
+        eReelMin.setText( String.valueOf(viewport.getxMin() ) );
+        eReelMax.setText( String.valueOf(viewport.getxMax() ) );
+        eImagMin.setText( String.valueOf(viewport.getyMin() ) );
+        eImagMax.setText( String.valueOf(viewport.getyMax() ) );
     }
 
     /**
      * Initialises the components of the MandelbrotFrame
      */
     private void initComponents() {
-        this.viewport = new Viewport(this.SIDE_LENGTH, xMin, xMax, yMin, yMax, zoomFactor);
+        this.viewport = new Viewport( this.SIDE_LENGTH, xMin, xMax, yMin, yMax, zoomFactor );
         bGenerate = new JButton();
         bSave = new JButton();
         eReelMin = new JTextField();
@@ -136,7 +138,7 @@ public class MandelbrotFrame extends JFrame {
         eImagMax = new JTextField();
         lZoom = new JLabel();
         eZoom = new JTextField();
-        pMandelbrotViewer = new MandelbrotPanel(this.SIDE_LENGTH);
+        pMandelbrotViewer = new MandelbrotPanel( this.SIDE_LENGTH );
 
         //======== this ========
         this.setResizable(false);
@@ -264,6 +266,6 @@ public class MandelbrotFrame extends JFrame {
                         .addComponent(pMandelbrotViewer, GroupLayout.PREFERRED_SIZE, 800, GroupLayout.PREFERRED_SIZE)))
         );
         pack();
-        setLocationRelativeTo(getOwner());
+        setLocationRelativeTo( getOwner() );
     }
 }

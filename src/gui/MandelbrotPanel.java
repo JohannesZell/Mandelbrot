@@ -22,8 +22,8 @@ public class MandelbrotPanel extends JPanel {
      * @param sideLength Length of the drawing surface
      */
     public MandelbrotPanel( int sideLength ) {
-        this.setPreferredSize( new Dimension( sideLength, sideLength ));
-        this.addMouseListener(listener);
+        this.setPreferredSize( new Dimension( sideLength, sideLength ) );
+        this.addMouseListener( listener );
     }
 
     /**
@@ -34,31 +34,25 @@ public class MandelbrotPanel extends JPanel {
         return image;
     }
 
+    /**
+     * MouseListener which listens for mouse-click and calls the zoom() method of the main class
+     * with the associated mouse-coordinates
+     */
     MouseListener listener = new MouseListener() {
         @Override
-        public void mouseClicked(MouseEvent e) {
-            main.zoom(e.getX(), e.getY());
-        }
+        public void mouseClicked( MouseEvent e ) { main.zoom(e.getX(), e.getY()); }
 
         @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
+        public void mousePressed( MouseEvent e ) { }
 
         @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
+        public void mouseReleased( MouseEvent e ) { }
 
         @Override
-        public void mouseEntered(MouseEvent e) {
-
-        }
+        public void mouseEntered( MouseEvent e ) { }
 
         @Override
-        public void mouseExited(MouseEvent e) {
-
-        }
+        public void mouseExited( MouseEvent e ) { }
     };
 
     /**
@@ -72,13 +66,14 @@ public class MandelbrotPanel extends JPanel {
      * Sets the local image
      * @param img Actual BufferedImage
      */
-    public void setImage( BufferedImage img) {
+    public void setImage(BufferedImage img) {
         this.image = img;
     }
 
-    public void loadImage( BufferedImage img ) {
-        clearAndRegenerate();
-    }
+    /**
+     * Calls the method clearAndRegenerate()
+     */
+    public void loadImage() { clearAndRegenerate(); }
 
     /**
      * Paints the local image on the panel if it's changed
