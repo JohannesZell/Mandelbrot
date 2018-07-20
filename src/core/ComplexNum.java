@@ -13,7 +13,6 @@ public class ComplexNum {
      */
     public double re;
 
-
     /**
      * Constructor that generates a new complex number
      */

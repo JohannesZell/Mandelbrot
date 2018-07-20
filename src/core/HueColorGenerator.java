@@ -8,6 +8,7 @@ public class HueColorGenerator implements ColorGenerator {
 
     /**
      * @see ColorGenerator#getColorFor(int, int)
+     * @return new Color
      */
     public Color getColorFor(int iterations, int maxIterations) {
         if (iterations == maxIterations) {

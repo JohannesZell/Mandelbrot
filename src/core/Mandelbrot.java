@@ -155,7 +155,7 @@ public final class Mandelbrot {
      * @param inMax the height or width from the image
      * @param mapMin x or y min value from the axis
      * @param mapMax x or y max value from the axis
-     * @return
+     * @return maped value
      */
     public double map(double in, double inMin, double inMax, double mapMin, double mapMax) {
         return (in - inMin) * (mapMax - mapMin) / (inMax - inMin) + mapMin;
