@@ -110,7 +110,7 @@ public final class Mandelbrot {
     /**
      * Method that sets local variables and start a new Generating thread
      * @param image BufferedImage on which is drawn
-     * @param xMin xMin value form the axis
+     * @param xMin xMin value from the axis
      * @param xMax xMax value from the axis
      * @param yMin yMin value from the axis
      * @param yMax yMax value from the axis
