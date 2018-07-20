@@ -17,11 +17,11 @@ public class Main {
 
     /**
      * Draws the mandelbrot
-     * @param mandelbrotViewer
-     * @param xmin
-     * @param xmax
-     * @param ymin
-     * @param ymax
+     * @param mandelbrotViewer BufferedImage
+     * @param xmin min x value
+     * @param xmax max x value
+     * @param ymin min y value
+     * @param ymax max y value
      */
     public static void drawMandelbrot( MandelbrotPanel mandelbrotViewer, double xmin, double xmax, double ymin, double ymax) {
         try {
