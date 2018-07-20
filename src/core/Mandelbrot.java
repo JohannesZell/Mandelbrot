@@ -156,8 +156,9 @@ public final class Mandelbrot {
      * @param mapMax x or y max value from the axis
      * @return
      */
-    public static double map(double in, double inMin, double inMax, double mapMin, double mapMax) {
+    public double map(double in, double inMin, double inMax, double mapMin, double mapMax) {
         return (in - inMin) * (mapMax - mapMin) / (inMax - inMin) + mapMin;
+
     }
 
     /**
