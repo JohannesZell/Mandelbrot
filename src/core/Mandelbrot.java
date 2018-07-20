@@ -79,7 +79,7 @@ public final class Mandelbrot {
                     z = (z.multiply(z)).add(c);
                     iterations++;
                 }
-                image.setRGB(x, y, colorGenerator.getColorFor(iterations, maxIterations).getRGB());
+                image.setRGB(x, y, colorGenerator.getColorFor(iterations, maxIterations).getRGB()); //sets the pixel with a calculated color
             }
         }
     }
@@ -102,7 +102,7 @@ public final class Mandelbrot {
                     z = (z.multiply(z)).add(setJulia);
                     iterations++;
                 }
-                image.setRGB(x, y, colorGenerator.getColorFor(iterations, maxIterations).getRGB());
+                image.setRGB(x, y, colorGenerator.getColorFor(iterations, maxIterations).getRGB()); //sets the pixel with a calculated color
             }
         }
     }
@@ -122,10 +122,10 @@ public final class Mandelbrot {
         this.yMin = yMin;
         this.yMax = yMax;
         this.renderJulia = false;
-        this.colorGenerator = new HueColorGenerator();
-        Thread thread = new Thread(new Generating());
+        this.colorGenerator = new HueColorGenerator(); //Generates a new colorGenerator object
+        Thread thread = new Thread(new Generating()); //generates a new thread object
         thread.start();
-        thread.join();
+        thread.join(); //Wait for the thread to finish
     }
 
     /**
@@ -136,15 +136,16 @@ public final class Mandelbrot {
      * @param yMin yMin value form the axis
      * @param yMax yMax value from the axis
      */
-    public void generateJuliaImage(BufferedImage image, double xMin, double xMax, double yMin, double yMax) {
+    public void generateJuliaImage(BufferedImage image, double xMin, double xMax, double yMin, double yMax) throws InterruptedException{
         this.image = image;
         this.xMin = xMin;
         this.xMax = xMax;
         this.yMin = yMin;
         this.yMax = yMax;
-        this.colorGenerator = new HueColorGenerator();
-        Thread thread = new Thread(new Generating());
+        this.colorGenerator = new HueColorGenerator(); //Generates a new colorGenerator object
+        Thread thread = new Thread(new Generating()); //generates a new thread object
         thread.start();
+        thread.join(); //Wait for the thread to finish
     }
 
     /**
@@ -177,9 +178,9 @@ public final class Mandelbrot {
          */
         public void run() {
             if (renderJulia == true) {
-                generateJulia();
+                generateJulia(); //Calls the generateJulia method
             } else {
-                generateMandelbrot();
+                generateMandelbrot(); //Calls the generateMandelbrot method
             }
         }
     }

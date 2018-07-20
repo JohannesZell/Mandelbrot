@@ -14,7 +14,6 @@ public class HueColorGenerator implements ColorGenerator {
             return new Color(0x000000); // black
         } else {
             return new Color(Color.HSBtoRGB(((float) Math.sqrt(iterations / (float) maxIterations) * (float)2), 1, 1));
-
         }
     }
 }
