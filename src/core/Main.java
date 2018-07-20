@@ -30,7 +30,7 @@ public class Main {
             e1.printStackTrace();
         }
         mandelbrotViewer.setImage( img );
-        mandelbrotViewer.loadImage( img );
+        mandelbrotViewer.loadImage();
         mandelbrotViewer.repaint();
     }
 
