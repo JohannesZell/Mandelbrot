@@ -35,6 +35,7 @@ public class Viewport {
     }
 
     /**
+     * @autor Henry Siebert
      * Zooms the image with a, from the start chosen, zoom factor into the desired direction
      * @param xCenter center-point of the x-axis to which the image gets zoomed
      * @param yCenter center-point of the y-axis to which the image gets zoomed

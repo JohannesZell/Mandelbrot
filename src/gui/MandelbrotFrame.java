@@ -85,7 +85,7 @@ public class MandelbrotFrame extends JFrame {
 
     /**
      * ActionListener for the bSave button object
-     * @param e
+     * @autor Henry Siebert
      */
     private void bSaveActionPerformed( ActionEvent e ) {
         FileDialog fd = new FileDialog( this, "Bitte Speicherort auswählen",FileDialog.SAVE );

@@ -1,6 +1,7 @@
 package core;
 /**
  * class to manage the calculation with complex numbers
+ * @autor Henry Siebert
  */
 public class ComplexNum {
 
