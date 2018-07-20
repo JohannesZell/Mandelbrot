@@ -1,6 +1,6 @@
 package gui;
-import core.Main;
 
+import core.Main;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -8,38 +8,30 @@ import java.awt.image.BufferedImage;
 import javax.swing.*;
 
 /**
+ * Panel for drawing the Mandelbrot-Image
  * @author Ronny Kohlhaus
  */
 public class MandelbrotPanel extends JPanel {
 
-    private static final long serialVersionUID = 42L;
+    private static final long serialVersionUID = 43L;
     private Main main = new Main();
-
-    public BufferedImage getImage() {
-        return image;
-    }
-
     private BufferedImage image;
 
+    /**
+     * Constructor of the MandelbrotPanel, which sets dimensions and adds a MouseListener for zooming.
+     * @param sideLength Length of the drawing surface
+     */
     public MandelbrotPanel( int sideLength ) {
         this.setPreferredSize( new Dimension( sideLength, sideLength ));
         this.addMouseListener(listener);
+    }
 
-        /*BufferedImage myPicture = null;
-        try {
-            myPicture = ImageIO.read(new File("/Users/ronny/IdeaProjects/mandelbrotRonny/src/javaGUI/image.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //Main.drawMandelbrot( this );
-        //JLabel picLabel = new JLabel(new ImageIcon(myPicture.getScaledInstance(1000,800,0)));
-        //picLabel.setBounds(0,0,800,800);
-        //add(picLabel);
-            try {
-                image = ImageIO.read(new File("/Users/ronny/IdeaProjects/mandelbrot/src/javaGUI/image.png"));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }  */
+    /**
+     * Image Getter-Function
+     * @return returns image
+     */
+    public BufferedImage getImage() {
+        return image;
     }
 
     MouseListener listener = new MouseListener() {
@@ -69,8 +61,11 @@ public class MandelbrotPanel extends JPanel {
         }
     };
 
+    /**
+     * Refreshes the canvas
+     */
     public void clearAndRegenerate() {
-        super.paint( getGraphics() );
+        super.paint(getGraphics());
     }
 
     /**
@@ -83,9 +78,6 @@ public class MandelbrotPanel extends JPanel {
 
     public void loadImage( BufferedImage img ) {
         clearAndRegenerate();
-        //JLabel picLabel = new JLabel(new ImageIcon(img.getScaledInstance(800,800,0)));
-        //picLabel.setBounds(0,0,800,800);
-        //add(picLabel);
     }
 
     /**

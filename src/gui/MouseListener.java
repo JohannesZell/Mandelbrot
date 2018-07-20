@@ -4,7 +4,9 @@ import core.Mandelbrot;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
-
+/**
+ * @author Ronny Kohlhaus
+ */
 public class MouseListener implements java.awt.event.MouseListener {
 
 private final int LEFT_MOUSE_BUTTON = 1;
